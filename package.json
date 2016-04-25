@@ -1,0 +1,32 @@
+{
+  "name": "rpg",
+  "version": "1.0.0",
+  "description": "rpg app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buchalla96/rpg-app.git"
+  },
+  "keywords": [
+    "rpg",
+    "app"
+  ],
+  "author": "Victor Schulze Buchalla",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/buchalla96/rpg-app/issues"
+  },
+  "homepage": "https://github.com/buchalla96/rpg-app#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.13"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.1"
+  }
+}
