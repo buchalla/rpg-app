@@ -1,14 +1,11 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
+const RouterLoader = require('./helpers/RouterLoader');
+const configs = require('./configs');
 
-app.get("/", function(req, res){
-    res.send("Hello World");
-});
+const rl = new RouterLoader(app, configs.folder.api);
+rl.requireRecursively();
 
-app.get("/yo", function (req, res) {
-    res.send("YO!");
-});
-
-var server = app.listen(3000, function () {
-    console.log("Listen on port ", server.address().port);
+app.listen( process.env.PORT || 3000, function(){
+    console.log('server listen on port', process.env.PORT || 3000);
 });
