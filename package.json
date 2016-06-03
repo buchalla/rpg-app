@@ -4,8 +4,8 @@
   "description": "rpg app",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node --harmony app.js",
+    "dev": "nodemon --harmony app.js"
   },
   "repository": {
     "type": "git",
