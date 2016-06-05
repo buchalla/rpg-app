@@ -1,11 +1,15 @@
+'use strict';
 const router = require("express").Router();
+const UsersController = require(`${configs.folder.controller}UsersController`);
 
-router.get('/', function(req, res){
-    res.send("Router: user");
-});
+router.get('/', UsersController.routeGet);
 
-router.get('/vitor', (req, res) =>{
-    res.send('vitor');
-});
+router.get('/:user_id', UsersController.routeGetById);
+
+router.post('/', UsersController.routePost);
+
+router.put('/:user_id', UsersController.routePut);
+
+router.delete('/:user_id', UsersController.routeDelete);
 
 module.exports = router;
