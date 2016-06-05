@@ -12,6 +12,17 @@ class UsersController {
         });
     }
 
+    routeFindByPassAndUsernameOrEmail(req, res) {
+        Users.findOne({$or: [{username: req.body.username}, {email: req.body.email}]})
+        .and({password: req.body.password})
+        .exec((err, data) => {
+            if (err)
+                res.send({status: false, data: err});
+            else
+                res.send({status: true, data: data});
+        });
+    }
+
     routeGetById(req, res) {
         Users.findById(req.params.user_id, (err, data) => {
             if (err)
