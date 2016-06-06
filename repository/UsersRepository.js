@@ -7,7 +7,9 @@ class UsersRepository {
 
     get(cb) {
         Users.find((err, users) => {
-            if (err)
+            if (!users)
+                return cb(false, 'No data found!');
+            else if (err)
                 return cb(false, err);
             else
                 return cb(true, users);
@@ -16,7 +18,9 @@ class UsersRepository {
 
     getById(id, cb) {
         Users.findById(id, (err, user) => {
-            if (err)
+            if (!user)
+                return cb(false, 'No data found!');
+            else if (err)
                 return cb(false, err);
             else
                 return cb(true, user);
@@ -28,7 +32,9 @@ class UsersRepository {
         Users.findOne({$or: [{username: useroremail}, {email: useroremail}]})
         .and({password: password})
         .exec((err, user) => {
-            if (err)
+            if (!user)
+                return cb(false, 'No data found!');
+            else if (err)
                 return cb(false, err);
             else
                 return cb(true, user);
@@ -50,6 +56,8 @@ class UsersRepository {
         Users.findById(id, (err, user) => {
             if (err)
                 throw err;
+            if (!user)
+                return cb(false, 'No data found!');
             try {
                 for (var key in data) {
                     if (key === 'password') {
@@ -74,7 +82,7 @@ class UsersRepository {
     delete(id, cb) {
         Users.remove({
             _id: id
-        }, (err, data) => {
+        }, (err, user) => {
             if (err)
                 return cb(false, err);
             else

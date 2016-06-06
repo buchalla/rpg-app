@@ -1,17 +1,17 @@
 'use strict';
 const router = require("express").Router();
-const UsersController = require(`${configs.folder.controller}UsersController`);
+const { routeGet, routeGetById, routePut, routeDelete } = require(`${configs.folder.controller}UsersController`);
 
-router.get('/', UsersController.routeGet);
+// List all users
+router.get('/', routeGet);
 
-router.get('/:user_id', UsersController.routeGetById);
+// Get user by id
+router.get('/:user_id', routeGetById);
 
-router.post('/', UsersController.routePost);
+// Alter user by id
+router.put('/:user_id', routePut);
 
-router.put('/:user_id', UsersController.routePut);
-
-router.delete('/:user_id', UsersController.routeDelete);
-
-router.post('/login', UsersController.routeLogin);
+// Remove user by id
+router.delete('/:user_id', routeDelete);
 
 module.exports = router;

@@ -24,7 +24,10 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
-    "mongoose": "^4.4.13"
+    "express-session": "^1.13.0",
+    "jsonwebtoken": "^7.0.0",
+    "mongoose": "^4.4.13",
+    "morgan": "^1.7.0"
   },
   "devDependencies": {
     "nodemon": "^1.9.1"

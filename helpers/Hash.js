@@ -5,7 +5,7 @@ class Hash {
 
     constructor() {
         this.hashType = 'sha256';
-        this.secret = 'hide in commit';
+        this.secret = 'awesomesecret';
     }
 
     make(str) {
