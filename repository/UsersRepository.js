@@ -1,5 +1,6 @@
 'use strict';
 const Users = require(`${configs.folder.model}Users`);
+const Hash = require(`${configs.folder.helpers}Hash`);
 
 
 class UsersRepository {
@@ -23,6 +24,7 @@ class UsersRepository {
     }
 
     getByPassAndUsernameOrEmail(useroremail, password, cb) {
+        password = Hash.make(password);
         Users.findOne({$or: [{username: useroremail}, {email: useroremail}]})
         .and({password: password})
         .exec((err, user) => {
@@ -34,6 +36,7 @@ class UsersRepository {
     }
 
     insert(data, cb) {
+        data.password = Hash.make(data.password);
         let user = new Users(data);
         user.save((err) => {
             if (err)
@@ -49,6 +52,9 @@ class UsersRepository {
                 throw err;
             try {
                 for (var key in data) {
+                    if (key === 'password') {
+                        data[key] = Hash.make(data[key]);
+                    }
                     if (user[key]) {
                         user[key] = data[key];
                     }
