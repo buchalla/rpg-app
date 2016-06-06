@@ -16,6 +16,9 @@ class UsersController {
     }
 
     routePost(req, res) {
+        if (!req.body.username || !req.body.email || !req.body.password) {
+            return res.send({status: false, data: "Parameters 'username', 'email' and 'password' are mandatory"})
+        }
         let user = {
             username: req.body.username,
             email: req.body.email,
