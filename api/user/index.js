@@ -12,6 +12,6 @@ router.put('/:user_id', UsersController.routePut);
 
 router.delete('/:user_id', UsersController.routeDelete);
 
-router.post('/login', UsersController.routeFindByPassAndUsernameOrEmail);
+router.post('/login', UsersController.routeLogin);
 
 module.exports = router;

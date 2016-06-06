@@ -4,6 +4,7 @@ module.exports = {
         api: `${__dirname}/api/`,
         controller: `${__dirname}/controller/`,
         helpers: `${__dirname}/helpers/`,
-        model: `${__dirname}/model/`
+        model: `${__dirname}/model/`,
+        repository: `${__dirname}/repository/`
     }
 };

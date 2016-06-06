@@ -1,81 +1,46 @@
 'use strict';
-const Users = require(`${configs.folder.model}users`);
+const UsersRepository = require(`${configs.folder.repository}UsersRepository`);
 
 class UsersController {
 
     routeGet(req, res) {
-        Users.find((err, data) => {
-            if (err)
-                res.send({status: false, data: err});
-            else
-                res.send({status: true, data: data});
+        UsersRepository.get((status, users) => {
+            return res.send({status: status, data: users});
         });
     }
 
-    routeFindByPassAndUsernameOrEmail(req, res) {
-        Users.findOne({$or: [{username: req.body.username}, {email: req.body.email}]})
-        .and({password: req.body.password})
-        .exec((err, data) => {
-            if (err)
-                res.send({status: false, data: err});
-            else
-                res.send({status: true, data: data});
+    routeLogin(req, res) {
+        UsersRepository.getByPassAndUsernameOrEmail(req.body.useroremail, req.body.password, (status, data) => {
+            return res.send({status: status, data: data});
         });
     }
 
     routeGetById(req, res) {
-        Users.findById(req.params.user_id, (err, data) => {
-            if (err)
-                res.send({status: false, data: err});
-            else
-                res.send({status: true, data: data});
+        UsersRepository.getById(req.params.user_id, (status, user) => {
+            return res.send({status: status, data: user});
         });
     }
 
     routePost(req, res) {
-        let user = new Users({
+        let user = {
             username: req.body.username,
             email: req.body.email,
             password: req.body.password
-        });
-        user.save((err) => {
-            if (err)
-                res.send({status: false, data: err});
-            else
-                res.send({status: true, data: 'User created!'});
+        };
+        UsersRepository.insert(user, (status, data) => {
+            return res.send({status: status, data: data});
         });
     }
 
     routePut(req, res) {
-        Users.findById(req.params.user_id, (err, data) => {
-            if (err)
-                throw err;
-            try {
-                for (var key in req.body) {
-                    if (data[key]) {
-                        data[key] = req.body[key];
-                    }
-                }
-                data.save((err) => {
-                    if (err)
-                        res.send({status:false, data:err});
-                    else
-                        res.send({status: true, data:'User updated!'});
-                });
-            } catch (e) {
-                res.send({status: false, data: e.message});
-            }
+        UsersRepository.update(req.params.user_id, req.body, (status, data) => {
+            return res.send({status: status, data: data});
         });
     }
 
     routeDelete(req, res) {
-        Users.remove({
-            _id: req.params.user_id
-        }, (err, data) => {
-            if (err)
-                res.send({status: false, data: data});
-            else
-                res.send({status: true, data: data});
+        UsersRepository.delete(req.params.user_id, (status, data) => {
+            return res.send({status: status, data: data});
         });
     }
 
