@@ -30,13 +30,13 @@ class UsersController {
     }
 
     routePut(req, res) {
-        UsersRepository.update(req.params.user_id, req.body, (status, data) => {
+        UsersRepository.update(req.auth._id, req.body, (status, data) => {
             return res.send({status, data});
         });
     }
 
     routeDelete(req, res) {
-        UsersRepository.delete(req.params.user_id, (status, data) => {
+        UsersRepository.delete(req.auth._id, (status, data) => {
             return res.send({status, data});
         });
     }

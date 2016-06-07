@@ -37,7 +37,12 @@ module.exports = class RouterLoader {
 
     getUrlFromFile(abspath) {
         let url = abspath.replace(this.routerFolder, "").replace(".js", "");
-        let arrUrl = url.split("\\");
+        let arrUrl;
+        if (/^win/.test(process.platform)) {
+            arrUrl = url.split("\\");
+        } else {
+            arrUrl = url.split("/");
+        }
         if (arrUrl[arrUrl.length - 1] === "index") {
             arrUrl.pop();
         }

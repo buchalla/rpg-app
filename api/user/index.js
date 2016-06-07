@@ -8,10 +8,10 @@ router.get('/', routeGet);
 // Get user by id
 router.get('/:user_id', routeGetById);
 
-// Alter user by id
-router.put('/:user_id', routePut);
+// Alter user by token
+router.put('/', routePut);
 
-// Remove user by id
-router.delete('/:user_id', routeDelete);
+// Remove user by token
+router.delete('/', routeDelete);
 
 module.exports = router;
