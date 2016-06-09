@@ -7,22 +7,20 @@ class UsersRepository {
 
     get(cb) {
         Users.find((err, users) => {
-            if (!users)
-                return cb(false, 'No data found!');
-            else if (err)
-                return cb(false, err);
-            else
+            if (!users || err) {
+                let msg = err || 'No data found!';
+                return cb(false, msg);
+            } else
                 return cb(true, users);
         });
     }
 
     getById(id, cb) {
         Users.findById(id, (err, user) => {
-            if (!user)
-                return cb(false, 'No data found!');
-            else if (err)
-                return cb(false, err);
-            else
+            if (!user || err) {
+                let msg = err || 'No data found!';
+                return cb(false, msg);
+            } else
                 return cb(true, user);
         });
     }
@@ -32,11 +30,10 @@ class UsersRepository {
         Users.findOne({$or: [{username: useroremail}, {email: useroremail}]})
         .and({password: password})
         .exec((err, user) => {
-            if (!user)
-                return cb(false, 'No data found!');
-            else if (err)
-                return cb(false, err);
-            else
+            if (!user || err) {
+                let msg = err || 'No data found!';
+                return cb(false, msg);
+            } else
                 return cb(true, user);
         });
     }
@@ -54,10 +51,10 @@ class UsersRepository {
 
     update(id, data, cb) {
         Users.findById(id, (err, user) => {
-            if (err)
-                throw err;
-            if (!user)
-                return cb(false, 'No data found!');
+            if (!user || err) {
+                let msg = err || 'No data found!';
+                return cb(false, msg);
+            } 
             try {
                 for (var key in data) {
                     if (key === 'password') {
